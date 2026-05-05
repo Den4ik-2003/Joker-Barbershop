@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Joker Barbershop — №1</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Raleway:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- NAV -->
+    <header class="nav" id="nav">
+      <div class="nav__logo">
+        <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+          <path
+            d="M20 2L23 14H37L26 22L30 35L20 27L10 35L14 22L3 14H17L20 2Z"
+            fill="var(--gold)"
+          />
+        </svg>
+        <div>
+          <span class="logo-name">JOKER</span>
+          <span class="logo-sub">BARBERSHOP</span>
+        </div>
+      </div>
+      <nav class="nav__links">
+        <a href="#hero">Головна</a>
+        <a href="#services">Послуги</a>
+        <a href="#masters">Майстри</a>
+        <a href="#contacts">Контакти</a>
+      </nav>
+      <a href="#booking" class="btn btn--outline">ЗАПИСАТИСЬ</a>
+      <button class="burger" id="burger">&#9776;</button>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#hero" onclick="closeMenu()">Головна</a>
+      <a href="#services" onclick="closeMenu()">Послуги</a>
+      <a href="#masters" onclick="closeMenu()">Майстри</a>
+      <a href="#contacts" onclick="closeMenu()">Контакти</a>
+      <a href="#booking" class="btn btn--gold" onclick="closeMenu()"
+        >ЗАПИСАТИСЬ</a
+      >
+    </div>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero__bg"></div>
+      <div class="hero__content">
+        <p class="hero__eyebrow reveal">— Люди, що цінують стиль</p>
+        <h1 class="hero__title reveal">
+          БАРБЕРШОП <span class="gold">№1</span>
+        </h1>
+        <p class="hero__sub reveal">Стиль, впевненість, класика</p>
+        <a href="#booking" class="btn btn--gold reveal"
+          >ЗАПИСАТИСЬ ОНЛАЙН <span class="arrow">›</span></a
+        >
+      </div>
+      <div class="hero__scroll">
+        <span></span>
+      </div>
+    </section>
+
+    <!-- MASTERS -->
+    <section class="masters" id="masters">
+      <div class="section-header">
+        <div class="divider">
+          <span></span><span class="scissors">✂</span><span></span>
+        </div>
+        <h2 class="section-title reveal">НАШІ МАЙСТРИ</h2>
+        <div class="divider">
+          <span></span><span class="scissors">✂</span><span></span>
+        </div>
+      </div>
+
+      <div class="masters__grid">
+        <div class="master-card reveal">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="master-card__img">
+                <img
+                  src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=400&q=80"
+                  alt="Артем"
+                />
+                <div class="master-card__overlay"></div>
+              </div>
+              <h3>АРТЕМ</h3>
+              <p>Класичні стрижки</p>
+              <a href="#" class="insta-link">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle
+                    cx="17.5"
+                    cy="6.5"
+                    r="1"
+                    fill="currentColor"
+                    stroke="none"
+                  />
+                </svg>
+              </a>
+            </div>
+
+            <div class="card-back">
+              Артем має понад п’ять років досвіду в барберингу. Працює з
+              класичними формами, уважно підбирає стиль під клієнта та приділяє
+              велику увагу деталям.
+            </div>
+          </div>
+        </div>
+
+        <div class="master-card reveal">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="master-card__img">
+                <img
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80"
+                  alt="Максим"
+                />
+                <div class="master-card__overlay"></div>
+              </div>
+              <h3>МАКСИМ</h3>
+              <p>Борода & Контур</p>
+              <a href="#" class="insta-link">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle
+                    cx="17.5"
+                    cy="6.5"
+                    r="1"
+                    fill="currentColor"
+                    stroke="none"
+                  />
+                </svg>
+              </a>
+            </div>
+
+            <div class="card-back">
+              Максим спеціалізується на роботі з бородою та чіткими контурами.
+              Має великий досвід і завжди допомагає підібрати ідеальний образ.
+            </div>
+          </div>
+        </div>
+
+        <div class="master-card reveal">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="master-card__img">
+                <img
+                  src="https://images.unsplash.com/photo-1552058544-f2b08422138a?w=400&q=80"
+                  alt="Денис"
+                />
+                <div class="master-card__overlay"></div>
+              </div>
+              <h3>ДЕНИС</h3>
+              <p>Фейд & Текстура</p>
+              <a href="#" class="insta-link">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle
+                    cx="17.5"
+                    cy="6.5"
+                    r="1"
+                    fill="currentColor"
+                    stroke="none"
+                  />
+                </svg>
+              </a>
+            </div>
+
+            <div class="card-back">
+              Денис працює з сучасними техніками фейду та текстурними стрижками.
+              Постійно вдосконалює свої навички та слідкує за трендами.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOCIAL -->
+    <section class="social">
+      <div class="social__left reveal">
+        <h2>СЛІДКУЙ<br />ЗА НАМИ</h2>
+        <p>
+          Ми створюємо не просто зачіски — ми створюємо стиль та настрій.
+          Підписуйся, щоб бачити більше крутих робіт та атмосферу зсередини.
+        </p>
+        <div class="social__links">
+          <a href="#">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle
+                cx="17.5"
+                cy="6.5"
+                r="1"
+                fill="currentColor"
+                stroke="none"
+              />
+            </svg>
+            Instagram
+          </a>
+          <a href="#">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.28a8.24 8.24 0 004.82 1.55V7.38a4.85 4.85 0 01-1.05-.69z"
+              />
+            </svg>
+            TikTok
+          </a>
+          <a href="#">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"
+              />
+            </svg>
+            Telegram
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- HISTORY -->
+    <section class="history" id="about">
+      <div class="history__img reveal-left">
+        <img
+          src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=700&q=80"
+          alt="Barbershop tools"
+        />
+        <div class="history__img-border"></div>
+      </div>
+      <div class="history__text reveal">
+        <h2>НАША ІСТОРІЯ</h2>
+        <p>
+          Joker Barbershop — це місце, де поєднуються традиції класичного
+          барберингу та сучасні тенденції. Ми відкрились з простою ідеєю: кожен
+          чоловік заслуговує на <strong>якісний сервіс</strong> та увагу до
+          деталей.
+        </p>
+        <p>
+          Тут ти отримаєш не лише ідеальну стрижку та доглянуту бороду, а й
+          атмосферу, в яку хочеться повертатись знову і знову.
+        </p>
+        <a href="#about" class="btn btn--outline-gold">ДІЗНАТИСЬ БІЛЬШЕ</a>
+      </div>
+    </section>
+
+    <!-- ADVANTAGES -->
+    <section class="advantages" id="services">
+      <div class="section-header">
+        <div class="divider">
+          <span></span><span class="scissors">✂</span><span></span>
+        </div>
+        <h2 class="section-title reveal">НАШІ ПЕРЕВАГИ</h2>
+        <div class="divider">
+          <span></span><span class="scissors">✂</span><span></span>
+        </div>
+      </div>
+      <div class="adv__grid">
+        <div class="adv-card reveal">
+          <div class="adv-card__icon">
+            <img src="images/icon1.webp" alt="" />
+          </div>
+          <h3>ДОСВІД</h3>
+          <p>Наші майстри з досвідом від 5 років.</p>
+        </div>
+        <div class="adv-card reveal" style="animation-delay: 0.1s">
+          <div class="adv-card__icon">
+            <img src="images/icon2.webp" alt="" />
+          </div>
+          <h3>СТЕРИЛЬНІСТЬ</h3>
+          <p>Інструменти проходять повну стерилізацію після кожного клієнта.</p>
+        </div>
+        <div class="adv-card reveal" style="animation-delay: 0.2s">
+          <div class="adv-card__icon">
+            <img src="images/icon3.webp" alt="" />
+          </div>
+          <h3>НАПОЇ</h3>
+          <p>Смачні напої та кава, щоб ти почувався як вдома.</p>
+        </div>
+        <div class="adv-card reveal" style="animation-delay: 0.3s">
+          <div class="adv-card__icon">
+            <img src="images/icon4.webp" alt="" />
+          </div>
+          <h3>ЗРУЧНИЙ ЧАС</h3>
+          <p>Онлайн запис 24/7 та гнучкий графік.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOKING -->
+    <section class="booking" id="booking">
+      <div class="section-header">
+        <div class="divider">
+          <span></span><span class="scissors">✂</span><span></span>
+        </div>
+        <h2 class="section-title reveal">ЗАПИСАТИСЬ ОНЛАЙН</h2>
+        <div class="divider">
+          <span></span><span class="scissors">✂</span><span></span>
+        </div>
+      </div>
+      <div class="booking__form reveal">
+        <div class="form-col">
+          <div class="field">
+            <label>Ім'я</label>
+            <input type="text" placeholder="Ваше ім'я" />
+          </div>
+          <div class="field">
+            <label>Телефон</label>
+            <input type="text" placeholder="+38 (___) ___-__-__" id="phone" />
+          </div>
+          <p class="form-note">
+            Ми зв'яжемось з вами для підтвердження запису.
+          </p>
+        </div>
+        <div class="form-col">
+          <label>Оберіть дату</label>
+          <div class="calendar" id="calendar"></div>
+        </div>
+        <div class="form-col">
+          <div class="field">
+            <label>Коментар (не обов'язково)</label>
+            <textarea placeholder="Ваші побажання"></textarea>
+          </div>
+          <button class="btn btn--gold full-width" id="bookBtn">
+            ЗАПИСАТИСЬ
+          </button>
+        </div>
+      </div>
+      <div class="booking__success" id="bookSuccess">
+        <div class="success-icon">✓</div>
+        <h3>Запис прийнято!</h3>
+        <p>Ми зв'яжемось з вами найближчим часом.</p>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer" id="contacts">
+      <div class="footer__logo">
+        <svg width="22" height="22" viewBox="0 0 40 40" fill="none">
+          <path
+            d="M20 2L23 14H37L26 22L30 35L20 27L10 35L14 22L3 14H17L20 2Z"
+            fill="var(--gold)"
+          />
+        </svg>
+        <div>
+          <span class="logo-name">JOKER</span>
+          <span class="logo-sub">BARBERSHOP</span>
+        </div>
+        <p>Стиль, впевненість, класика.</p>
+        <div class="footer__socials">
+          <a href="#">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle
+                cx="17.5"
+                cy="6.5"
+                r="1"
+                fill="currentColor"
+                stroke="none"
+              />
+            </svg>
+          </a>
+          <a href="#">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.28a8.24 8.24 0 004.82 1.55V7.38a4.85 4.85 0 01-1.05-.69z"
+              />
+            </svg>
+          </a>
+          <a href="#">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer__col">
+        <h4>КОНТАКТИ</h4>
+        <p>+38 (099) 123 45 67</p>
+        <p>joker.barbershop@gmail.com</p>
+      </div>
+      <div class="footer__col">
+        <h4>АДРЕСА</h4>
+        <p>вул. Шевченка, 15</p>
+        <p>м. Львів, 79000</p>
+        <a href="#" class="map-link">Показати на карті →</a>
+      </div>
+      <div class="footer__col">
+        <h4>ГРАФІК РОБОТИ</h4>
+        <p>Пн – Пт: 10:00 – 20:00</p>
+        <p>Сб – Нд: 10:00 – 18:00</p>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2024 Joker Barbershop. Усі права захищені.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
