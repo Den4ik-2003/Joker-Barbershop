@@ -25,12 +25,16 @@ VARIABLES & RESET
 }
 html {
   scroll-behavior: smooth;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 body {
   background: var(--bg);
   color: var(--white);
   font-family: var(--font-body);
   font-weight: 300;
+  overflow-x: hidden;
+  max-width: 100%;
   overflow-x: hidden;
 }
 img {
@@ -218,10 +222,11 @@ HERO
 ======================== */
 .hero {
   position: relative;
-  min-height: 100vh;
   display: flex;
   align-items: center;
   overflow: hidden;
+  min-height: 100vh;
+  max-width: 100vw;
   padding: 120px 60px 60px;
 }
 .hero__bg {
@@ -237,6 +242,7 @@ HERO
 }
 .hero__bg::before {
   content: "";
+  max-width: 100vw;
   position: absolute;
   inset: 0;
   background: url("images/main.webp") center/cover no-repeat;
@@ -277,7 +283,7 @@ HERO
 }
 .hero__chair {
   position: absolute;
-  right: -30px;
+  right: 0px;
   top: 50%;
   transform: translateY(-50%);
   width: 52%;
@@ -347,10 +353,11 @@ HERO
 }
 @media screen and (max-width: 500px) {
   .hero__title {
-    font-size: 30px !important;
+    font-size: 2.2rem;
+    line-height: 1.2;
   }
   .hero__content {
-    margin-top: 20%;
+    margin-top: 0;
   }
 }
 /* ========================
@@ -385,6 +392,9 @@ SECTION HEADER
 .scissors {
   color: var(--gold);
   font-size: 1.1rem;
+}
+.scissors img {
+  max-width: 20px;
 }
 /* ========================
 MASTERS
@@ -487,12 +497,19 @@ MASTERS
   background: var(--bg3);
   color: #fff;
 }
+.select-barber {
+  margin-top: 20px;
+}
 .master-card {
   perspective: 1000px;
 }
 .master-card.flipped .card-front {
   transform: rotateY(180deg);
   opacity: 0;
+}
+.master-card.active {
+  outline: 2px solid gold;
+  transform: scale(1.03);
 }
 .master-card.flipped .card-back {
   transform: rotateY(0);
@@ -766,14 +783,6 @@ HISTORY
     gap: 40px;
   }
 }
-@media (max-width: 768px) {
-  .prices {
-    padding: 70px 24px;
-  }
-  .prices__wrap {
-    grid-template-columns: 1fr;
-  }
-}
 /* ========================
 BOOKING
 ======================== */
@@ -835,7 +844,7 @@ BOOKING
   opacity: 0.4;
   line-height: 1.6;
 }
-.service-select {
+.service-select, .service-barber {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 4px;
@@ -848,15 +857,15 @@ BOOKING
   appearance: none;
   cursor: pointer;
 }
-.service-select:focus {
+.service-select:focus, .service-barber:focus {
   border-color: var(--gold);
   box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.08);
 }
-.service-select option {
+.service-select option, .service-barber option {
   background: #111;
   color: var(--white);
 }
-.service-select:hover {
+.service-select:hover, .service-barber:hover {
   border-color: var(--gold);
 }
 .time-picker {
@@ -1160,7 +1169,7 @@ RESPONSIVE
   }
   .hero__chair {
     width: 46%;
-    right: -20px;
+    right: 0px;
   }
   .masters {
     padding: 80px 30px;
@@ -1202,12 +1211,37 @@ RESPONSIVE
   }
 }
 @media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding: 100px 20px 40px;
+    justify-content: center;
+  }
+  .nav__logo {
+    max-width: 75px;
+  }
+  .prices {
+    padding: 70px 24px;
+  }
+  .prices__wrap {
+    grid-template-columns: 1fr;
+  }
+  .hero__content {
+    max-width: 100%;
+    margin-top: 0;
+  }
   .nav__links,
   .nav > .btn--outline {
     display: none;
   }
   .burger {
     display: block;
+  }
+  .btn {
+    padding: 12px 20px;
+    font-size: 0.75rem;
+  }
+  .hero__scroll {
+    display: none;
   }
   .hero {
     flex-direction: column;

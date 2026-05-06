@@ -150,6 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const nameInput = document.getElementById("name");
   const phoneInput = document.getElementById("phone");
   const serviceSelect = document.querySelector(".service-select");
+  const barberSelect = document.getElementById("barberSelect");
   const form = document.querySelector(".booking__form");
   const success = document.getElementById("bookSuccess");
   let selectedDate = null;
@@ -187,10 +188,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const name = nameInput.value.trim();
     const phone = phoneInput.value.trim();
     const service = serviceSelect.value;
+    const barber = barberSelect.value;
     if (!name) return showModal("Введіть ім'я");
     if (!phone) return showModal("Введіть телефон");
     if (!service || service === "Виберіть послугу")
       return showModal("Оберіть послугу");
+    if (!barber || barber === "Виберіть барбера")
+      return showModal("Оберіть барбера");
     if (!selectedDate) return showModal("Оберіть дату");
     if (!selectedTime) return showModal("Оберіть час");
     isSending = true;
@@ -198,6 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
 Ім'я: ${name}
 Телефон: ${phone}
 Послуга: ${service}
+Барбер: ${barber}
 Дата: ${selectedDate}
 Час: ${selectedTime}`;
     const formData = new FormData();
@@ -246,4 +251,41 @@ document.querySelectorAll(".master-card").forEach((card) => {
     card.classList.toggle("flipped");
   });
 });
+document.querySelectorAll(".select-barber").forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+});
+document.querySelectorAll(".insta-link").forEach((link) => {
+  link.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+});
+// ========================
+// NOW YEAR
+// ========================
 document.getElementById("year").textContent = new Date().getFullYear();
+// ========================
+// CHANGE BARBER
+// ========================
+document.addEventListener("DOMContentLoaded", () => {
+  const barberSelect = document.getElementById("barberSelect");
+  const buttons = document.querySelectorAll(".select-barber");
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const barberName = btn.dataset.barber;
+      const options = barberSelect.querySelectorAll("option");
+      options.forEach((opt) => {
+        if (opt.value === barberName) {
+          opt.selected = true;
+        } else {
+          opt.selected = false;
+        }
+      });
+      barberSelect.dispatchEvent(new Event("change"));
+      document.querySelector("#booking").scrollIntoView({
+        behavior: "smooth",
+      });
+    });
+  });
+});

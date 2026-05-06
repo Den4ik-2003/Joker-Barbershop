@@ -21,7 +21,7 @@
       <nav class="nav__links">
         <a href="#hero">Головна</a>
         <a href="#services">Послуги</a>
-        <a href="#masters">Майстри</a>
+        <a href="#masters">Барбери</a>
         <a href="#contacts">Контакти</a>
       </nav>
       <a href="#booking" class="btn btn--outline">ЗАПИСАТИСЬ</a>
@@ -31,7 +31,7 @@
     <div class="mobile-menu" id="mobileMenu">
       <a href="#hero" onclick="closeMenu()">Головна</a>
       <a href="#services" onclick="closeMenu()">Послуги</a>
-      <a href="#masters" onclick="closeMenu()">Майстри</a>
+      <a href="#masters" onclick="closeMenu()">Барбери</a>
       <a href="#contacts" onclick="closeMenu()">Контакти</a>
       <a href="#booking" class="btn btn--gold" onclick="closeMenu()"
         >ЗАПИСАТИСЬ</a
@@ -58,11 +58,11 @@
     <section class="masters" id="masters">
       <div class="section-header">
         <div class="divider">
-          <span></span><span class="scissors">✂</span><span></span>
+          <span></span><span class="scissors"><img src="images/scissors.svg" loading="lazy" alt="Scissors"></span><span></span>
         </div>
-        <h2 class="section-title reveal">НАШІ МАЙСТРИ</h2>
+        <h2 class="section-title reveal">НАШІ БАРБЕРИ</h2>
         <div class="divider">
-          <span></span><span class="scissors">✂</span><span></span>
+          <span></span><span class="scissors"><img src="images/scissors.svg" loading="lazy" alt="Scissors"></span><span></span>
         </div>
       </div>
 
@@ -94,6 +94,10 @@
                   />
                 </svg>
               </a>
+              <br />
+              <button class="btn btn--gold select-barber" data-barber="Артем">
+                ОБРАТИ
+              </button>
             </div>
 
             <div class="card-back">
@@ -131,6 +135,10 @@
                   />
                 </svg>
               </a>
+              <br />
+              <button class="btn btn--gold select-barber" data-barber="Максим">
+                ОБРАТИ
+              </button>
             </div>
 
             <div class="card-back">
@@ -167,6 +175,11 @@
                   />
                 </svg>
               </a>
+              <br />
+
+              <button class="btn btn--gold select-barber" data-barber="Денис">
+                ОБРАТИ
+              </button>
             </div>
 
             <div class="card-back">
@@ -256,11 +269,11 @@
     <section class="advantages" id="services">
       <div class="section-header">
         <div class="divider">
-          <span></span><span class="scissors">✂</span><span></span>
+          <span></span><span class="scissors"><img src="images/scissors.svg" loading="lazy" alt="Scissors"></span><span></span>
         </div>
         <h2 class="section-title reveal">НАШІ ПЕРЕВАГИ</h2>
         <div class="divider">
-          <span></span><span class="scissors">✂</span><span></span>
+          <span></span><span class="scissors"><img src="images/scissors.svg" loading="lazy" alt="Scissors"></span><span></span>
         </div>
       </div>
       <div class="adv__grid">
@@ -269,7 +282,7 @@
             <img src="images/icon1.webp" alt="Icon" loading="lazy" />
           </div>
           <h3>ДОСВІД</h3>
-          <p>Наші майстри з досвідом від 5 років.</p>
+          <p>Наші барбери з досвідом від 5 років.</p>
         </div>
         <div class="adv-card reveal" style="animation-delay: 0.1s">
           <div class="adv-card__icon">
@@ -299,11 +312,11 @@
     <section class="prices" id="prices">
       <div class="section-header">
         <div class="divider">
-          <span></span><span class="scissors">✂</span><span></span>
+          <span></span><span class="scissors"><img src="images/scissors.svg" loading="lazy" alt="Scissors"></span><span></span>
         </div>
         <h2 class="section-title reveal">ПОСЛУГИ І ЦІНИ</h2>
         <div class="divider">
-          <span></span><span class="scissors">✂</span><span></span>
+          <span></span><span class="scissors"><img src="images/scissors.svg" loading="lazy" alt="Scissors"></span><span></span>
         </div>
       </div>
 
@@ -375,11 +388,11 @@
     <section class="booking" id="booking">
       <div class="section-header">
         <div class="divider">
-          <span></span><span class="scissors">✂</span><span></span>
+          <span></span><span class="scissors"><img src="images/scissors.svg" loading="lazy" alt="Scissors"></span><span></span>
         </div>
         <h2 class="section-title reveal">ЗАПИСАТИСЬ ОНЛАЙН</h2>
         <div class="divider">
-          <span></span><span class="scissors">✂</span><span></span>
+          <span></span><span class="scissors"><img src="images/scissors.svg" loading="lazy" alt="Scissors"></span><span></span>
         </div>
       </div>
 
@@ -399,14 +412,24 @@
             <label>Оберіть послугу</label>
             <select class="service-select">
               <option disabled selected>Виберіть послугу</option>
-              <option>Стрижка</option>
-              <option>Подовжена стрижка</option>
-              <option>Стрижка бороди та окантовка</option>
-              <option>Королівське гоління</option>
-              <option>Батько та син</option>
-              <option>Стрижка + борода</option>
-              <option>Стрижка + гоління</option>
-              <option>Догляд ORISING</option>
+              <option value="Стрижка">Стрижка</option>
+              <option value="Подовжена стрижка">Подовжена стрижка</option>
+              <option value="Стрижка бороди та окантовка">Стрижка бороди та окантовка</option>
+              <option value="Королівське гоління">Королівське гоління</option>
+              <option value="Батько та син">Батько та син</option>
+              <option value="Стрижка + борода">Стрижка + борода</option>
+              <option value="Стрижка + гоління">Стрижка + гоління</option>
+              <option value="Догляд ORISING">Догляд ORISING</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Барбер</label>
+            <select id="barberSelect" class="service-barber">
+              <option disabled selected>Виберіть барбера</option>
+              <option value="Артем">Артем</option>
+              <option value="Максим">Максим</option>
+              <option value="Денис">Денис</option>
             </select>
           </div>
 
