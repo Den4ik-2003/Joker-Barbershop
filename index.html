@@ -8,23 +8,15 @@
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Raleway:wght@300;400;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   </head>
   <body>
     <!-- NAV -->
     <header class="nav" id="nav">
       <div class="nav__logo">
-        <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
-          <path
-            d="M20 2L23 14H37L26 22L30 35L20 27L10 35L14 22L3 14H17L20 2Z"
-            fill="var(--gold)"
-          />
-        </svg>
-        <div>
-          <span class="logo-name">JOKER</span>
-          <span class="logo-sub">BARBERSHOP</span>
-        </div>
+        <img src="images/logo.webp" loading="lazy" alt="Logo" />
       </div>
       <nav class="nav__links">
         <a href="#hero">Головна</a>
@@ -55,9 +47,7 @@
           БАРБЕРШОП <span class="gold">№1</span>
         </h1>
         <p class="hero__sub reveal">Стиль, впевненість, класика</p>
-        <a href="#booking" class="btn btn--gold reveal"
-          >ЗАПИСАТИСЬ ОНЛАЙН <span class="arrow">›</span></a
-        >
+        <a href="#booking" class="btn btn--gold reveal">ЗАПИСАТИСЬ ОНЛАЙН</a>
       </div>
       <div class="hero__scroll">
         <span></span>
@@ -81,15 +71,12 @@
           <div class="card-inner">
             <div class="card-front">
               <div class="master-card__img">
-                <img
-                  src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=400&q=80"
-                  alt="Артем"
-                />
+                <img src="images/men1.webp" alt="Артем" loading="lazy" />
                 <div class="master-card__overlay"></div>
               </div>
               <h3>АРТЕМ</h3>
               <p>Класичні стрижки</p>
-              <a href="#" class="insta-link">
+              <a class="insta-link">
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
@@ -121,15 +108,12 @@
           <div class="card-inner">
             <div class="card-front">
               <div class="master-card__img">
-                <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80"
-                  alt="Максим"
-                />
+                <img src="images/men2.webp" alt="Максим" loading="lazy" />
                 <div class="master-card__overlay"></div>
               </div>
               <h3>МАКСИМ</h3>
               <p>Борода & Контур</p>
-              <a href="#" class="insta-link">
+              <a class="insta-link">
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
@@ -160,15 +144,12 @@
           <div class="card-inner">
             <div class="card-front">
               <div class="master-card__img">
-                <img
-                  src="https://images.unsplash.com/photo-1552058544-f2b08422138a?w=400&q=80"
-                  alt="Денис"
-                />
+                <img src="images/men3.webp" alt="Денис" loading="lazy" />
                 <div class="master-card__overlay"></div>
               </div>
               <h3>ДЕНИС</h3>
               <p>Фейд & Текстура</p>
-              <a href="#" class="insta-link">
+              <a class="insta-link">
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
@@ -206,7 +187,7 @@
           Підписуйся, щоб бачити більше крутих робіт та атмосферу зсередини.
         </p>
         <div class="social__links">
-          <a href="#">
+          <a href="https://www.instagram.com/joker.barbershop.chg">
             <svg
               viewBox="0 0 24 24"
               fill="none"
@@ -225,7 +206,7 @@
             </svg>
             Instagram
           </a>
-          <a href="#">
+          <a>
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path
                 d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.28a8.24 8.24 0 004.82 1.55V7.38a4.85 4.85 0 01-1.05-.69z"
@@ -233,7 +214,7 @@
             </svg>
             TikTok
           </a>
-          <a href="#">
+          <a>
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path
                 d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"
@@ -248,10 +229,7 @@
     <!-- HISTORY -->
     <section class="history" id="about">
       <div class="history__img reveal-left">
-        <img
-          src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=700&q=80"
-          alt="Barbershop tools"
-        />
+        <img src="images/history.webp" alt="Barbershop tools" loading="lazy" />
         <div class="history__img-border"></div>
       </div>
       <div class="history__text reveal">
@@ -266,7 +244,11 @@
           Тут ти отримаєш не лише ідеальну стрижку та доглянуту бороду, а й
           атмосферу, в яку хочеться повертатись знову і знову.
         </p>
-        <a href="#about" class="btn btn--outline-gold">ДІЗНАТИСЬ БІЛЬШЕ</a>
+        <a
+          href="https://www.instagram.com/joker.barbershop.chg"
+          class="btn btn--outline-gold"
+          >ДІЗНАТИСЬ БІЛЬШЕ</a
+        >
       </div>
     </section>
 
@@ -284,31 +266,107 @@
       <div class="adv__grid">
         <div class="adv-card reveal">
           <div class="adv-card__icon">
-            <img src="images/icon1.webp" alt="" />
+            <img src="images/icon1.webp" alt="Icon" loading="lazy" />
           </div>
           <h3>ДОСВІД</h3>
           <p>Наші майстри з досвідом від 5 років.</p>
         </div>
         <div class="adv-card reveal" style="animation-delay: 0.1s">
           <div class="adv-card__icon">
-            <img src="images/icon2.webp" alt="" />
+            <img src="images/icon2.webp" alt="Icon" loading="lazy" />
           </div>
           <h3>СТЕРИЛЬНІСТЬ</h3>
           <p>Інструменти проходять повну стерилізацію після кожного клієнта.</p>
         </div>
         <div class="adv-card reveal" style="animation-delay: 0.2s">
           <div class="adv-card__icon">
-            <img src="images/icon3.webp" alt="" />
+            <img src="images/icon3.webp" alt="Icon" loading="lazy" />
           </div>
           <h3>НАПОЇ</h3>
           <p>Смачні напої та кава, щоб ти почувався як вдома.</p>
         </div>
         <div class="adv-card reveal" style="animation-delay: 0.3s">
           <div class="adv-card__icon">
-            <img src="images/icon4.webp" alt="" />
+            <img src="images/icon4.webp" alt="icon" loading="lazy" />
           </div>
           <h3>ЗРУЧНИЙ ЧАС</h3>
           <p>Онлайн запис 24/7 та гнучкий графік.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICES -->
+    <section class="prices" id="prices">
+      <div class="section-header">
+        <div class="divider">
+          <span></span><span class="scissors">✂</span><span></span>
+        </div>
+        <h2 class="section-title reveal">ПОСЛУГИ І ЦІНИ</h2>
+        <div class="divider">
+          <span></span><span class="scissors">✂</span><span></span>
+        </div>
+      </div>
+
+      <div class="prices__wrap">
+        <div class="price-col reveal-left">
+          <h3>СТРИЖКА</h3>
+
+          <div class="price-row">
+            <span>СТРИЖКА</span>
+            <span>500–1150 грн</span>
+          </div>
+
+          <div class="price-row">
+            <span>ПОДОВЖЕНА СТРИЖКА</span>
+            <span>950–1450 грн</span>
+          </div>
+
+          <div class="price-row">
+            <span>СТРИЖКА БОРОДИ ТА ОКАНТОВКА</span>
+            <span>450–900 грн</span>
+          </div>
+
+          <div class="price-row">
+            <span>КОРОЛІВСЬКЕ ГОЛІННЯ</span>
+            <span>400–600 грн</span>
+          </div>
+        </div>
+        <div class="price-col reveal">
+          <h3>КОМПЛЕКС</h3>
+
+          <div class="price-row">
+            <span>БАТЬКО ТА СИН</span>
+            <span>950–2000 грн</span>
+          </div>
+
+          <div class="price-row">
+            <span>СТРИЖКА ТА БОРОДА</span>
+            <span>800–1700 грн</span>
+          </div>
+
+          <div class="price-row">
+            <span>СТРИЖКА ТА ГОЛІННЯ</span>
+            <span>1050–1600 грн</span>
+          </div>
+        </div>
+
+        <div class="price-col reveal-right">
+          <h3>ДОГЛЯД ЗА ВОЛОССЯМ</h3>
+
+          <div class="price-row">
+            <span>ВИРІВНЮВАННЯ PH БАЛАНСУ</span>
+            <span>1800 грн</span>
+          </div>
+
+          <div class="price-row">
+            <span>ДОГЛЯД ПРОТИ ЛУПИ</span>
+            <span>1800–2000 грн</span>
+          </div>
+
+          <div class="price-row">
+            <span>СТИМУЛЯЦІЯ РОСТУ ВОЛОССЯ</span>
+            <span>1800 грн</span>
+          </div>
         </div>
       </div>
     </section>
@@ -324,34 +382,67 @@
           <span></span><span class="scissors">✂</span><span></span>
         </div>
       </div>
+
       <div class="booking__form reveal">
         <div class="form-col">
           <div class="field">
             <label>Ім'я</label>
-            <input type="text" placeholder="Ваше ім'я" />
+            <input id="name" type="text" placeholder="Ваше ім'я" />
           </div>
+
           <div class="field">
             <label>Телефон</label>
-            <input type="text" placeholder="+38 (___) ___-__-__" id="phone" />
+            <input id="phone" type="text" placeholder="+38 (___) ___-__-__" />
           </div>
-          <p class="form-note">
-            Ми зв'яжемось з вами для підтвердження запису.
-          </p>
+
+          <div class="field">
+            <label>Оберіть послугу</label>
+            <select class="service-select">
+              <option disabled selected>Виберіть послугу</option>
+              <option>Стрижка</option>
+              <option>Подовжена стрижка</option>
+              <option>Стрижка бороди та окантовка</option>
+              <option>Королівське гоління</option>
+              <option>Батько та син</option>
+              <option>Стрижка + борода</option>
+              <option>Стрижка + гоління</option>
+              <option>Догляд ORISING</option>
+            </select>
+          </div>
+
+          <p class="form-note">Оберіть всі дані для запису</p>
         </div>
+
         <div class="form-col">
           <label>Оберіть дату</label>
           <div class="calendar" id="calendar"></div>
         </div>
+
         <div class="form-col">
-          <div class="field">
-            <label>Коментар (не обов'язково)</label>
-            <textarea placeholder="Ваші побажання"></textarea>
+          <label>Оберіть годину</label>
+          <div class="time-picker hidden" id="timePicker">
+            <div class="time-grid">
+              <div class="time-slot">09:00</div>
+              <div class="time-slot">10:00</div>
+              <div class="time-slot">11:00</div>
+              <div class="time-slot">12:00</div>
+              <div class="time-slot">13:00</div>
+              <div class="time-slot">14:00</div>
+              <div class="time-slot">15:00</div>
+              <div class="time-slot">16:00</div>
+              <div class="time-slot">17:00</div>
+              <div class="time-slot">18:00</div>
+              <div class="time-slot">19:00</div>
+              <div class="time-slot">20:00</div>
+            </div>
           </div>
+
           <button class="btn btn--gold full-width" id="bookBtn">
             ЗАПИСАТИСЬ
           </button>
         </div>
       </div>
+
       <div class="booking__success" id="bookSuccess">
         <div class="success-icon">✓</div>
         <h3>Запис прийнято!</h3>
@@ -359,22 +450,23 @@
       </div>
     </section>
 
+    <div class="modal" id="modal">
+      <div class="modal__content">
+        <p id="modalText"></p>
+        <button class="btn btn--gold full-width" id="modalBtn">OK</button>
+      </div>
+    </div>
+
     <!-- FOOTER -->
     <footer class="footer" id="contacts">
       <div class="footer__logo">
-        <svg width="22" height="22" viewBox="0 0 40 40" fill="none">
-          <path
-            d="M20 2L23 14H37L26 22L30 35L20 27L10 35L14 22L3 14H17L20 2Z"
-            fill="var(--gold)"
-          />
-        </svg>
-        <div>
-          <span class="logo-name">JOKER</span>
-          <span class="logo-sub">BARBERSHOP</span>
+        <div class="nav__logo">
+          <img src="images/logo.webp" loading="lazy" alt="Logo" />
         </div>
+
         <p>Стиль, впевненість, класика.</p>
         <div class="footer__socials">
-          <a href="#">
+          <a href="https://www.instagram.com/joker.barbershop.chg">
             <svg
               viewBox="0 0 24 24"
               fill="none"
@@ -392,14 +484,14 @@
               />
             </svg>
           </a>
-          <a href="#">
+          <a>
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path
                 d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.28a8.24 8.24 0 004.82 1.55V7.38a4.85 4.85 0 01-1.05-.69z"
               />
             </svg>
           </a>
-          <a href="#">
+          <a>
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path
                 d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"
@@ -410,25 +502,24 @@
       </div>
       <div class="footer__col">
         <h4>КОНТАКТИ</h4>
-        <p>+38 (099) 123 45 67</p>
-        <p>joker.barbershop@gmail.com</p>
+        <p>+38 (063) 340 40 50</p>
       </div>
       <div class="footer__col">
         <h4>АДРЕСА</h4>
-        <p>вул. Шевченка, 15</p>
-        <p>м. Львів, 79000</p>
-        <a href="#" class="map-link">Показати на карті →</a>
+        <p>вул. Героїв Майдану, 10</p>
+        <p>м. Шептицький, 80100</p>
+        <a class="map-link" href="https://maps.app.goo.gl/pp7gtGdjp16B9XJN9"
+          >Показати на карті →</a
+        >
       </div>
       <div class="footer__col">
         <h4>ГРАФІК РОБОТИ</h4>
-        <p>Пн – Пт: 10:00 – 20:00</p>
-        <p>Сб – Нд: 10:00 – 18:00</p>
+        <p>Пн – Нд: 10:00 – 20:00</p>
       </div>
       <div class="footer__bottom">
-        <p>© 2024 Joker Barbershop. Усі права захищені.</p>
+        <p>© <span id="year"></span> Joker Barbershop. Усі права захищені.</p>
       </div>
     </footer>
-
     <script src="script.js"></script>
   </body>
 </html>

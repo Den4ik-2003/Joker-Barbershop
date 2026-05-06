@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 /* ========================
-   VARIABLES & RESET
+VARIABLES & RESET
 ======================== */
 :root {
   --bg: #0d0d0d;
@@ -16,7 +16,6 @@
   --font-body: "Raleway", sans-serif;
   --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 *,
 *::before,
 *::after {
@@ -24,11 +23,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 html {
   scroll-behavior: smooth;
 }
-
 body {
   background: var(--bg);
   color: var(--white);
@@ -36,7 +33,6 @@ body {
   font-weight: 300;
   overflow-x: hidden;
 }
-
 img {
   display: block;
   width: 100%;
@@ -46,9 +42,8 @@ a {
   text-decoration: none;
   color: inherit;
 }
-
 /* ========================
-   BUTTONS
+BUTTONS
 ======================== */
 .btn {
   display: inline-flex;
@@ -110,7 +105,6 @@ a {
   justify-content: center;
   margin-top: 16px;
 }
-
 /* ========================
    REVEAL ANIMATIONS
 ======================== */
@@ -133,9 +127,8 @@ a {
   opacity: 1 !important;
   transform: none !important;
 }
-
 /* ========================
-   NAV
+NAV
 ======================== */
 .nav {
   position: fixed;
@@ -160,25 +153,7 @@ a {
   border-bottom: 1px solid var(--border);
 }
 .nav__logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.logo-name {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  font-weight: 900;
-  letter-spacing: 3px;
-  color: var(--white);
-  line-height: 1;
-}
-.logo-sub {
-  display: block;
-  font-size: 0.55rem;
-  letter-spacing: 4px;
-  color: var(--gold);
-  line-height: 1;
+  max-width: 100px;
 }
 .nav__links {
   display: flex;
@@ -217,7 +192,6 @@ a {
   font-size: 1.4rem;
   cursor: pointer;
 }
-
 .mobile-menu {
   display: none;
   flex-direction: column;
@@ -233,14 +207,14 @@ a {
 }
 .mobile-menu.open {
   display: flex;
+  justify-content: start;
 }
 .mobile-menu a {
   font-size: 0.9rem;
   letter-spacing: 2px;
 }
-
 /* ========================
-   HERO
+HERO
 ======================== */
 .hero {
   position: relative;
@@ -379,9 +353,8 @@ a {
     margin-top: 20%;
   }
 }
-
 /* ========================
-   SECTION HEADER
+SECTION HEADER
 ======================== */
 .section-header {
   text-align: center;
@@ -413,9 +386,8 @@ a {
   color: var(--gold);
   font-size: 1.1rem;
 }
-
 /* ========================
-   MASTERS
+MASTERS
 ======================== */
 .masters {
   padding: 100px 60px;
@@ -439,6 +411,7 @@ a {
 }
 .master-card:hover {
   border-color: var(--gold);
+  cursor: pointer;
   transform: translateY(-6px);
   box-shadow: 0 20px 60px rgba(201, 168, 76, 0.1);
 }
@@ -488,6 +461,7 @@ a {
 }
 .insta-link:hover {
   color: var(--gold-light);
+  cursor: pointer;
   transform: scale(1.1);
 }
 .card-inner {
@@ -524,9 +498,8 @@ a {
   transform: rotateY(0);
   opacity: 1;
 }
-
 /* ========================
-   SOCIAL
+SOCIAL
 ======================== */
 .social {
   padding: 100px 60px;
@@ -587,6 +560,7 @@ a {
 }
 .social__links a:hover {
   opacity: 1;
+  cursor: pointer;
   color: var(--gold);
 }
 .social__icon {
@@ -635,9 +609,8 @@ a {
     transform: translateY(-14px);
   }
 }
-
 /* ========================
-   HISTORY
+HISTORY
 ======================== */
 .history {
   display: flex;
@@ -683,7 +656,6 @@ a {
 .history__text .btn--outline-gold {
   margin-top: 20px;
 }
-
 /* ========================
    ADVANTAGES
 ======================== */
@@ -727,9 +699,83 @@ a {
   opacity: 0.65;
   line-height: 1.7;
 }
-
 /* ========================
-   BOOKING
+   PRICES 
+======================== */
+.prices {
+  padding: 100px 60px;
+  background: var(--bg);
+  position: relative;
+}
+.prices__sub {
+  text-align: center;
+  opacity: 0.6;
+  font-size: 0.9rem;
+  margin-bottom: 50px;
+}
+.prices__wrap {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.price-col h3 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 3px;
+  color: var(--gold);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  transition: var(--transition);
+}
+.price-row span:last-child {
+  color: var(--gold);
+  font-weight: 600;
+}
+.price-row:hover {
+  color: var(--gold-light);
+}
+.prices::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(201, 168, 76, 0.04),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+@media (max-width: 1024px) {
+  .prices {
+    padding: 80px 30px;
+  }
+  .prices__wrap {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+}
+@media (max-width: 768px) {
+  .prices {
+    padding: 70px 24px;
+  }
+  .prices__wrap {
+    grid-template-columns: 1fr;
+  }
+}
+/* ========================
+BOOKING
 ======================== */
 .booking {
   padding: 100px 60px;
@@ -749,7 +795,7 @@ a {
 .form-col {
   display: flex;
   flex-direction: column;
-  gap: px;
+  gap: 8px;
 }
 .field {
   display: flex;
@@ -789,8 +835,115 @@ a {
   opacity: 0.4;
   line-height: 1.6;
 }
-
-/* CALENDAR */
+.service-select {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 12px 14px;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  outline: none;
+  transition: var(--transition);
+  appearance: none;
+  cursor: pointer;
+}
+.service-select:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.08);
+}
+.service-select option {
+  background: #111;
+  color: var(--white);
+}
+.service-select:hover {
+  border-color: var(--gold);
+}
+.time-picker {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px;
+  animation: fadeIn 0.3s ease;
+}
+.time-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.time-slot {
+  text-align: center;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  transition: var(--transition);
+}
+.time-slot:hover {
+  background: var(--gold-dim);
+  color: var(--gold);
+}
+.time-slot.active {
+  background: var(--gold);
+  color: #0d0d0d;
+  font-weight: 700;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+  z-index: 9999;
+}
+.modal.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.modal__content {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  padding: 28px;
+  border-radius: 8px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  animation: pop 0.25s ease;
+}
+.modal__content p {
+  font-size: 0.9rem;
+  margin-bottom: 18px;
+  color: var(--white);
+  opacity: 0.9;
+}
+@keyframes pop {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+/* ========================
+CALENDAR
+======================== */
 .calendar {
   background: var(--bg);
   border: 1px solid var(--border);
@@ -864,8 +1017,9 @@ a {
 .cal-day.empty {
   cursor: default;
 }
-
-/* booking success */
+/* ========================
+BOOKING SUCCESS
+======================== */
 .booking__success {
   display: none;
   text-align: center;
@@ -903,9 +1057,8 @@ a {
   opacity: 0.6;
   font-size: 0.9rem;
 }
-
 /* ========================
-   FOOTER
+FOOTER
 ======================== */
 .footer {
   background: #080808;
@@ -989,9 +1142,8 @@ a {
   opacity: 0.3;
   letter-spacing: 1px;
 }
-
 /* ========================
-   RESPONSIVE
+RESPONSIVE
 ======================== */
 @media (max-width: 1024px) {
   .nav {
@@ -1049,7 +1201,6 @@ a {
     grid-template-columns: 1fr 1fr;
   }
 }
-
 @media (max-width: 768px) {
   .nav__links,
   .nav > .btn--outline {
