@@ -940,6 +940,11 @@ BOOKING
   color: var(--white);
   opacity: 0.9;
 }
+.time-slot.past {
+  opacity: 0.25;
+  cursor: not-allowed;
+  pointer-events: none;
+}
 @keyframes pop {
   from {
     transform: scale(0.85);
@@ -1151,6 +1156,27 @@ FOOTER
   opacity: 0.3;
   letter-spacing: 1px;
 }
+.footer__dev {
+  margin-top: 12px;
+  text-align: center;
+  margin: 0 auto;
+  grid-column: 1 / -1;
+  font-size: 12px;
+  opacity: 0.45;
+  letter-spacing: 1px;
+  transition: 0.3s;
+}
+.footer__dev a {
+  color: #c8a96b;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.footer__dev:hover {
+  opacity: 0.9;
+}
+.footer__dev a:hover {
+  color: #fff;
+}
 /* ========================
 RESPONSIVE
 ======================== */
@@ -1212,9 +1238,13 @@ RESPONSIVE
 }
 @media (max-width: 768px) {
   .hero {
-    min-height: auto;
-    padding: 100px 20px 40px;
+    min-height: 100vh;
+    height: 100vh;
+    padding: 100px 24px 40px;
+    display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
   .nav__logo {
     max-width: 75px;

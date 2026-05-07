@@ -19,52 +19,33 @@ function closeMenu() {
 // ========================
 // REVEAL ON SCROLL
 // ========================
-const revealEls = document.querySelectorAll(
-  ".reveal, .reveal-right, .reveal-left",
-);
+const revealEls = document.querySelectorAll(".reveal, .reveal-right, .reveal-left");
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       const el = entry.target;
-
       const delay = el.style.animationDelay || "0s";
       const ms = parseFloat(delay) * 1000;
-
       if (entry.isIntersecting) {
-        setTimeout(() => {
-          el.classList.add("revealed");
-        }, ms);
+        setTimeout(() => el.classList.add("revealed"), ms);
       } else {
         el.classList.remove("revealed");
       }
     });
   },
-  {
-    threshold: 0.12,
-  },
+  { threshold: 0.12 }
 );
 revealEls.forEach((el) => observer.observe(el));
 // ========================
 // CALENDAR
 // ========================
 const calContainer = document.getElementById("calendar");
-const MONTHS_UA = [
-  "Січень",
-  "Лютий",
-  "Березень",
-  "Квітень",
-  "Травень",
-  "Червень",
-  "Липень",
-  "Серпень",
-  "Вересень",
-  "Жовтень",
-  "Листопад",
-  "Грудень",
-];
-const DAYS_UA = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Нд"];
+const MONTHS_UA = ["Січень","Лютий","Березень","Квітень","Травень","Червень","Липень","Серпень","Вересень","Жовтень","Листопад","Грудень"];
+const DAYS_UA = ["Пн","Вт","Ср","Чт","Пт","Сб","Нд"];
 let calDate = new Date();
-let selectedDate = null;
+let selectedDate = null;     // Date object — для календаря
+let selectedDateStr = null;  // рядок "08.05.2026" — для відправки в бота
+
 function renderCalendar() {
   const year = calDate.getFullYear();
   const month = calDate.getMonth();
@@ -74,16 +55,17 @@ function renderCalendar() {
   const lastDay = new Date(year, month + 1, 0);
   let startOffset = firstDay.getDay() - 1;
   if (startOffset < 0) startOffset = 6;
+
   let html = `
     <div class="cal-header">
-      <button id="calPrev">‹</button>
+      <button type="button" id="calPrev">‹</button>
       <span>${MONTHS_UA[month]} ${year}</span>
-      <button id="calNext">›</button>
+      <button type="button" id="calNext">›</button>
     </div>
     <div class="cal-grid">
   `;
-  DAYS_UA.forEach((d) => {
-    html += `<div class="cal-day-name">${d}</div>`;
+  DAYS_UA.forEach((day) => {
+    html += `<div class="cal-day-name">${day}</div>`;
   });
   for (let i = 0; i < startOffset; i++) {
     html += `<div class="cal-day empty"></div>`;
@@ -93,8 +75,7 @@ function renderCalendar() {
     date.setHours(0, 0, 0, 0);
     const isPast = date < today;
     const isToday = date.getTime() === today.getTime();
-    const isSelected =
-      selectedDate && date.getTime() === selectedDate.getTime();
+    const isSelected = selectedDate && date.getTime() === selectedDate.getTime();
     let cls = "cal-day";
     if (isPast) cls += " past";
     if (isToday) cls += " today";
@@ -103,24 +84,70 @@ function renderCalendar() {
   }
   html += `</div>`;
   calContainer.innerHTML = html;
-  document.getElementById("calPrev").addEventListener("click", () => {
+}
+
+renderCalendar();
+
+calContainer.addEventListener("click", (e) => {
+  const target = e.target;
+  if (target.id === "calPrev") {
     calDate.setMonth(calDate.getMonth() - 1);
     renderCalendar();
-  });
-  document.getElementById("calNext").addEventListener("click", () => {
+    return;
+  }
+  if (target.id === "calNext") {
     calDate.setMonth(calDate.getMonth() + 1);
     renderCalendar();
+    return;
+  }
+  if (
+    target.classList.contains("cal-day") &&
+    !target.classList.contains("empty") &&
+    !target.classList.contains("past")
+  ) {
+    selectedDate = new Date(Number(target.dataset.ts));
+
+    // Формуємо рядок для бота
+    const d = String(selectedDate.getDate()).padStart(2, "0");
+    const m = String(selectedDate.getMonth() + 1).padStart(2, "0");
+    const y = selectedDate.getFullYear();
+    selectedDateStr = `${d}.${m}.${y}`;
+
+    renderCalendar();
+    updateTimeSlots(); // оновлюємо слоти після вибору дати
+  }
+});
+// ========================
+// TIME SLOTS
+// ========================
+let selectedTime = null;
+
+function updateTimeSlots() {
+  const now = new Date();
+  const todayStr = `${String(now.getDate()).padStart(2, "0")}.${String(now.getMonth() + 1).padStart(2, "0")}.${now.getFullYear()}`;
+  const isToday = selectedDateStr === todayStr;
+
+  document.querySelectorAll(".time-slot").forEach((slot) => {
+    const slotHour = parseInt(slot.textContent.trim().split(":")[0]);
+
+    if (isToday && slotHour <= now.getHours()) {
+      slot.classList.add("past");
+      slot.classList.remove("active");
+      if (selectedTime === slot.textContent.trim()) selectedTime = null;
+    } else {
+      slot.classList.remove("past");
+    }
+
+    slot.onclick = () => {
+      if (slot.classList.contains("past")) return;
+      selectedTime = slot.textContent.trim();
+      document.querySelectorAll(".time-slot").forEach((s) => s.classList.remove("active"));
+      slot.classList.add("active");
+    };
   });
-  calContainer
-    .querySelectorAll(".cal-day:not(.empty):not(.past)")
-    .forEach((el) => {
-      el.addEventListener("click", () => {
-        selectedDate = new Date(parseInt(el.dataset.ts));
-        renderCalendar();
-      });
-    });
 }
-renderCalendar();
+
+updateTimeSlots();
 // ========================
 // PHONE MASK
 // ========================
@@ -153,36 +180,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const barberSelect = document.getElementById("barberSelect");
   const form = document.querySelector(".booking__form");
   const success = document.getElementById("bookSuccess");
-  let selectedDate = null;
-  let selectedTime = null;
   let isSending = false;
+
   function showModal(text) {
     modalText.textContent = text;
     modal.classList.add("open");
   }
-  modalBtn.onclick = () => {
-    modal.classList.remove("open");
-  };
-  document.querySelectorAll(".cal-day").forEach((day) => {
-    day.addEventListener("click", () => {
-      const month = new Date().getMonth() + 1;
-      const year = new Date().getFullYear();
-      selectedDate = `${day.textContent.padStart(2, "0")}.${String(month).padStart(2, "0")}.${year}`;
-      document
-        .querySelectorAll(".cal-day")
-        .forEach((d) => d.classList.remove("selected"));
-      day.classList.add("selected");
-    });
-  });
-  document.querySelectorAll(".time-slot").forEach((slot) => {
-    slot.addEventListener("click", () => {
-      selectedTime = slot.textContent;
-      document
-        .querySelectorAll(".time-slot")
-        .forEach((s) => s.classList.remove("active"));
-      slot.classList.add("active");
-    });
-  });
+
+  modalBtn.onclick = () => modal.classList.remove("open");
+
   async function sendBooking() {
     if (isSending) return;
     const name = nameInput.value.trim();
@@ -191,75 +197,56 @@ document.addEventListener("DOMContentLoaded", () => {
     const barber = barberSelect.value;
     if (!name) return showModal("Введіть ім'я");
     if (!phone) return showModal("Введіть телефон");
-    if (!service || service === "Виберіть послугу")
-      return showModal("Оберіть послугу");
-    if (!barber || barber === "Виберіть барбера")
-      return showModal("Оберіть барбера");
-    if (!selectedDate) return showModal("Оберіть дату");
+    if (!service || service === "Виберіть послугу") return showModal("Оберіть послугу");
+    if (!barber || barber === "Виберіть барбера") return showModal("Оберіть барбера");
+    if (!selectedDateStr) return showModal("Оберіть дату");
     if (!selectedTime) return showModal("Оберіть час");
+
     isSending = true;
-    const text = `💈 НОВИЙ ЗАПИС
-Ім'я: ${name}
-Телефон: ${phone}
-Послуга: ${service}
-Барбер: ${barber}
-Дата: ${selectedDate}
-Час: ${selectedTime}`;
+
+    const text = `💈 НОВИЙ ЗАПИС\nІм'я: ${name}\nТелефон: ${phone}\nПослуга: ${service}\nБарбер: ${barber}\nДата: ${selectedDateStr}\nЧас: ${selectedTime}`;
+
     const formData = new FormData();
     formData.append("chat_id", "2129690062");
     formData.append("text", text);
+
     try {
       const res = await fetch(
         "https://api.telegram.org/bot8665211387:AAGfiXBdXqJxPcw6K4OQzchoPGnA_r2raXI/sendMessage",
-        {
-          method: "POST",
-          body: formData,
-        },
+        { method: "POST", body: formData }
       );
       const data = await res.json();
       if (data.ok) {
-        form.style.display = "none";
-        success.style.display = "block";
+        form.style.opacity = "0";
+        setTimeout(() => {
+          form.style.display = "none";
+          success.style.display = "block";
+          requestAnimationFrame(() => success.classList.add("show"));
+          success.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 400);
       } else {
         showModal("Помилка відправки");
       }
     } catch (e) {
       showModal("Помилка мережі");
     }
+
     isSending = false;
   }
+
   bookBtn.addEventListener("click", sendBooking);
-});
-// ========================
-// CHANGE CLOCK
-// ========================
-document.querySelectorAll(".time-slot").forEach((slot) => {
-  slot.addEventListener("click", () => {
-    selectedTime = slot.textContent;
-    document
-      .querySelectorAll(".time-slot")
-      .forEach((s) => s.classList.remove("active"));
-    slot.classList.add("active");
-    document.querySelector(".time-grid").classList.add("has-selected");
-  });
 });
 // ========================
 // FLIP MASTERS
 // ========================
 document.querySelectorAll(".master-card").forEach((card) => {
-  card.addEventListener("click", () => {
-    card.classList.toggle("flipped");
-  });
+  card.addEventListener("click", () => card.classList.toggle("flipped"));
 });
 document.querySelectorAll(".select-barber").forEach((btn) => {
-  btn.addEventListener("click", (e) => {
-    e.stopPropagation();
-  });
+  btn.addEventListener("click", (e) => e.stopPropagation());
 });
 document.querySelectorAll(".insta-link").forEach((link) => {
-  link.addEventListener("click", (e) => {
-    e.stopPropagation();
-  });
+  link.addEventListener("click", (e) => e.stopPropagation());
 });
 // ========================
 // NOW YEAR
@@ -274,18 +261,13 @@ document.addEventListener("DOMContentLoaded", () => {
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
       const barberName = btn.dataset.barber;
-      const options = barberSelect.querySelectorAll("option");
-      options.forEach((opt) => {
-        if (opt.value === barberName) {
-          opt.selected = true;
-        } else {
-          opt.selected = false;
-        }
+      barberSelect.querySelectorAll("option").forEach((opt) => {
+        opt.selected = opt.value === barberName;
       });
       barberSelect.dispatchEvent(new Event("change"));
-      document.querySelector("#booking").scrollIntoView({
-        behavior: "smooth",
-      });
+      document.querySelector("#booking").scrollIntoView({ behavior: "smooth" });
     });
   });
 });
+
+
