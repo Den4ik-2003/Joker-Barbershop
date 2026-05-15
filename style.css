@@ -35,7 +35,6 @@ body {
   font-weight: 300;
   overflow-x: hidden;
   max-width: 100%;
-  overflow-x: hidden;
 }
 img {
   display: block;
@@ -99,6 +98,24 @@ BUTTONS
   background: var(--gold);
   color: #0d0d0d;
   transform: translateY(-2px);
+}
+/* History button in nav */
+.btn--history {
+  background: transparent;
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  color: var(--gold);
+  font-size: 0.8rem;
+  padding: 13px 28px;
+  letter-spacing: 1px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: var(--font-body);
+  font-weight: 600;
+}
+.btn--history:hover {
+  background: var(--gold-dim);
+  border-color: var(--gold);
 }
 .btn .arrow {
   font-size: 1.1rem;
@@ -188,6 +205,11 @@ NAV
 .nav__links a:hover::after {
   width: 100%;
 }
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 .burger {
   display: none;
   background: none;
@@ -216,6 +238,15 @@ NAV
 .mobile-menu a {
   font-size: 0.9rem;
   letter-spacing: 2px;
+}
+.mobile-menu a:last-child {
+  justify-content: center;
+}
+.mobile-history {
+  font-size: 0.85rem !important;
+  letter-spacing: 1px !important;
+  justify-content: center;
+  width: 100%;
 }
 /* ========================
 HERO
@@ -334,22 +365,10 @@ HERO
   animation: scrollLine 1.8s infinite;
 }
 @keyframes scrollLine {
-  0% {
-    transform: scaleY(0);
-    transform-origin: top;
-  }
-  50% {
-    transform: scaleY(1);
-    transform-origin: top;
-  }
-  51% {
-    transform: scaleY(1);
-    transform-origin: bottom;
-  }
-  100% {
-    transform: scaleY(0);
-    transform-origin: bottom;
-  }
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
 }
 @media screen and (max-width: 500px) {
   .hero__title {
@@ -580,54 +599,8 @@ SOCIAL
   cursor: pointer;
   color: var(--gold);
 }
-.social__icon {
-  position: relative;
-  flex-shrink: 0;
-}
-.ig-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(
-    circle,
-    rgba(201, 168, 76, 0.2) 0%,
-    transparent 70%
-  );
-  filter: blur(30px);
-  animation: igPulse 3s ease-in-out infinite;
-}
-@keyframes igPulse {
-  0%,
-  100% {
-    opacity: 0.5;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.15);
-  }
-}
-.ig-big {
-  width: 160px;
-  height: 160px;
-  position: relative;
-  filter: drop-shadow(0 10px 40px rgba(201, 168, 76, 0.25));
-  animation: igFloat 4s ease-in-out infinite;
-}
-@keyframes igFloat {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-14px);
-  }
-}
 /* ========================
-HISTORY
+HISTORY SECTION
 ======================== */
 .history {
   display: flex;
@@ -899,15 +872,12 @@ BOOKING
   font-weight: 700;
 }
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
+/* ========================
+MODALS (validation + history)
+======================== */
 .modal {
   position: fixed;
   inset: 0;
@@ -940,20 +910,104 @@ BOOKING
   color: var(--white);
   opacity: 0.9;
 }
+/* History modal overrides */
+.modal__content--history {
+  width: 480px;
+  max-width: 95vw;
+  max-height: 80vh;
+  overflow-y: auto;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 28px;
+}
+.history-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.history-modal-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 3px;
+  color: var(--gold);
+  font-weight: 700;
+}
+.history-modal-close {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--white);
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.history-modal-close:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+.history-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 18px;
+  transition: var(--transition);
+}
+.history-item:hover {
+  border-color: rgba(201, 168, 76, 0.4);
+}
+.history-item__date {
+  font-size: 0.68rem;
+  letter-spacing: 1.5px;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 8px;
+  opacity: 0.8;
+}
+.history-item__row {
+  font-size: 0.82rem;
+  opacity: 0.75;
+  line-height: 1.7;
+}
+.history-item__row strong {
+  color: var(--white);
+  font-weight: 600;
+  opacity: 1;
+}
+.history-empty {
+  text-align: center;
+  padding: 40px 20px;
+  opacity: 0.4;
+  font-size: 0.85rem;
+  line-height: 1.8;
+}
+.history-empty span {
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
 .time-slot.past {
   opacity: 0.25;
   cursor: not-allowed;
   pointer-events: none;
 }
 @keyframes pop {
-  from {
-    transform: scale(0.85);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 /* ========================
 CALENDAR
@@ -1015,12 +1069,15 @@ CALENDAR
   background: var(--gold-dim);
   color: var(--gold);
 }
+/* FIX: selected always shows gold bg with dark text, regardless of today */
 .cal-day.selected {
   background: var(--gold);
-  color: #0d0d0d;
+  color: #0d0d0d !important;
   font-weight: 700;
+  border: none !important;
 }
-.cal-day.today {
+/* today without being selected — show gold border, gold text */
+.cal-day.today:not(.selected) {
   border: 1px solid var(--gold);
   color: var(--gold);
 }
@@ -1055,12 +1112,8 @@ BOOKING SUCCESS
   animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 @keyframes popIn {
-  from {
-    transform: scale(0);
-  }
-  to {
-    transform: scale(1);
-  }
+  from { transform: scale(0); }
+  to { transform: scale(1); }
 }
 .booking__success h3 {
   font-family: var(--font-display);
@@ -1190,6 +1243,9 @@ RESPONSIVE
   .nav__links {
     gap: 22px;
   }
+  .nav__actions {
+    gap: 8px;
+  }
   .hero {
     padding: 120px 30px 60px;
   }
@@ -1236,6 +1292,15 @@ RESPONSIVE
     grid-template-columns: 1fr 1fr;
   }
 }
+@media screen and (max-width: 870px) {
+  .nav__links,
+  .nav__actions {
+    display: none;
+  }
+  .burger {
+    display: block;
+  }
+}
 @media (max-width: 768px) {
   .hero {
     min-height: 100vh;
@@ -1259,13 +1324,6 @@ RESPONSIVE
     max-width: 100%;
     margin-top: 0;
   }
-  .nav__links,
-  .nav > .btn--outline {
-    display: none;
-  }
-  .burger {
-    display: block;
-  }
   .btn {
     padding: 12px 20px;
     font-size: 0.75rem;
@@ -1288,16 +1346,8 @@ RESPONSIVE
     margin-top: 40px;
   }
   .hero__chair img {
-    mask-image: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.9) 60%,
-      transparent 100%
-    );
-    -webkit-mask-image: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.9) 60%,
-      transparent 100%
-    );
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 60%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 60%, transparent 100%);
   }
   .masters {
     padding: 70px 24px;
@@ -1324,5 +1374,8 @@ RESPONSIVE
   .footer {
     padding: 40px 24px 20px;
     grid-template-columns: 1fr;
+  }
+  .modal__content--history {
+    width: 95vw;
   }
 }

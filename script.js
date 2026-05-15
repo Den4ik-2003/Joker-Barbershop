@@ -43,8 +43,8 @@ const calContainer = document.getElementById("calendar");
 const MONTHS_UA = ["Січень","Лютий","Березень","Квітень","Травень","Червень","Липень","Серпень","Вересень","Жовтень","Листопад","Грудень"];
 const DAYS_UA = ["Пн","Вт","Ср","Чт","Пт","Сб","Нд"];
 let calDate = new Date();
-let selectedDate = null;     // Date object — для календаря
-let selectedDateStr = null;  // рядок "08.05.2026" — для відправки в бота
+let selectedDate = null;
+let selectedDateStr = null;
 
 function renderCalendar() {
   const year = calDate.getFullYear();
@@ -76,10 +76,14 @@ function renderCalendar() {
     const isPast = date < today;
     const isToday = date.getTime() === today.getTime();
     const isSelected = selectedDate && date.getTime() === selectedDate.getTime();
+
+    // Build classes — selected takes visual priority over today
     let cls = "cal-day";
     if (isPast) cls += " past";
+    // Add today class only when NOT selected (CSS handles styling)
     if (isToday) cls += " today";
     if (isSelected) cls += " selected";
+
     html += `<div class="${cls}" data-ts="${date.getTime()}">${d}</div>`;
   }
   html += `</div>`;
@@ -106,15 +110,12 @@ calContainer.addEventListener("click", (e) => {
     !target.classList.contains("past")
   ) {
     selectedDate = new Date(Number(target.dataset.ts));
-
-    // Формуємо рядок для бота
     const d = String(selectedDate.getDate()).padStart(2, "0");
     const m = String(selectedDate.getMonth() + 1).padStart(2, "0");
     const y = selectedDate.getFullYear();
     selectedDateStr = `${d}.${m}.${y}`;
-
     renderCalendar();
-    updateTimeSlots(); // оновлюємо слоти після вибору дати
+    updateTimeSlots();
   }
 });
 // ========================
@@ -129,7 +130,6 @@ function updateTimeSlots() {
 
   document.querySelectorAll(".time-slot").forEach((slot) => {
     const slotHour = parseInt(slot.textContent.trim().split(":")[0]);
-
     if (isToday && slotHour <= now.getHours()) {
       slot.classList.add("past");
       slot.classList.remove("active");
@@ -137,7 +137,6 @@ function updateTimeSlots() {
     } else {
       slot.classList.remove("past");
     }
-
     slot.onclick = () => {
       if (slot.classList.contains("past")) return;
       selectedTime = slot.textContent.trim();
@@ -166,6 +165,73 @@ if (phoneInput) {
     e.target.value = formatted;
   });
 }
+// ========================
+// HISTORY — localStorage helpers
+// ========================
+const HISTORY_KEY = "joker_bookings";
+
+function getHistory() {
+  try {
+    return JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");
+  } catch {
+    return [];
+  }
+}
+
+function saveBookingToHistory(booking) {
+  const history = getHistory();
+  history.unshift(booking); // newest first
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+}
+
+function renderHistory() {
+  const list = document.getElementById("historyList");
+  const history = getHistory();
+  if (!history.length) {
+    list.innerHTML = `
+      <div class="history-empty">
+        <span>💈</span>
+        Записів поки немає.<br>Зробіть перший запис!
+      </div>`;
+    return;
+  }
+  list.innerHTML = history.map((b, i) => `
+    <div class="history-item">
+      <div class="history-item__date">Запис #${history.length - i} · ${b.createdAt}</div>
+      <div class="history-item__row"><strong>Ім'я:</strong> ${b.name}</div>
+      <div class="history-item__row"><strong>Телефон:</strong> ${b.phone}</div>
+      <div class="history-item__row"><strong>Послуга:</strong> ${b.service}</div>
+      <div class="history-item__row"><strong>Барбер:</strong> ${b.barber}</div>
+      <div class="history-item__row"><strong>Дата:</strong> ${b.date} о ${b.time}</div>
+    </div>
+  `).join("");
+}
+
+function openHistoryModal() {
+  renderHistory();
+  document.getElementById("historyModal").classList.add("open");
+}
+
+function closeHistoryModal() {
+  document.getElementById("historyModal").classList.remove("open");
+}
+
+// History button wiring (desktop + mobile)
+document.getElementById("historyBtn").addEventListener("click", openHistoryModal);
+const historyBtnMobile = document.getElementById("historyBtnMobile");
+if (historyBtnMobile) {
+  historyBtnMobile.addEventListener("click", () => {
+    closeMenu();
+    openHistoryModal();
+  });
+}
+document.getElementById("historyModalClose").addEventListener("click", closeHistoryModal);
+document.getElementById("historyModalCloseBtn").addEventListener("click", closeHistoryModal);
+
+// Close history modal on backdrop click
+document.getElementById("historyModal").addEventListener("click", (e) => {
+  if (e.target === document.getElementById("historyModal")) closeHistoryModal();
+});
 // ========================
 // BOOKING SUBMIT
 // ========================
@@ -217,6 +283,18 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       const data = await res.json();
       if (data.ok) {
+        // Save to history
+        const now = new Date();
+        saveBookingToHistory({
+          name,
+          phone,
+          service,
+          barber,
+          date: selectedDateStr,
+          time: selectedTime,
+          createdAt: now.toLocaleDateString("uk-UA", { day: "2-digit", month: "2-digit", year: "numeric" })
+        });
+
         form.style.opacity = "0";
         setTimeout(() => {
           form.style.display = "none";
@@ -269,5 +347,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-
-
