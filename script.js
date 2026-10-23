@@ -1,13 +1,45 @@
-// ========================
-// NAV SCROLL
-// ========================
+const root = document.documentElement;
+const intro = document.getElementById("intro");
+
+function finishIntro() {
+  if (!intro || !intro.isConnected) return;
+  root.classList.remove("has-intro");
+  intro.remove();
+  document.dispatchEvent(new Event("introdone"));
+}
+
+if (intro) {
+  if (!root.classList.contains("has-intro")) {
+    intro.remove();
+  } else {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduced) {
+      const frag = document.createDocumentFragment();
+      for (let i = 0; i < 14; i++) {
+        const s = document.createElement("span");
+        s.className = "intro__spark";
+        s.style.setProperty("--x", Math.random() * 100 + "%");
+        s.style.setProperty("--s", 2 + Math.random() * 3 + "px");
+        s.style.setProperty("--d", 4 + Math.random() * 3 + "s");
+        s.style.setProperty("--t", Math.random() * 5 + "s");
+        s.style.setProperty("--dx", (Math.random() * 80 - 40) + "px");
+        frag.appendChild(s);
+      }
+      intro.appendChild(frag);
+    }
+    setTimeout(finishIntro, reduced ? 1700 : 7100);
+    intro.addEventListener("click", () => {
+      intro.style.animation = "introOut 0.4s ease forwards";
+      setTimeout(finishIntro, 400);
+    });
+  }
+}
+
 const nav = document.getElementById("nav");
 window.addEventListener("scroll", () => {
   nav.classList.toggle("scrolled", window.scrollY > 50);
 });
-// ========================
-// BURGER MENU
-// ========================
+
 const burger = document.getElementById("burger");
 const mobileMenu = document.getElementById("mobileMenu");
 burger.addEventListener("click", () => {
@@ -16,9 +48,7 @@ burger.addEventListener("click", () => {
 function closeMenu() {
   mobileMenu.classList.remove("open");
 }
-// ========================
-// REVEAL ON SCROLL
-// ========================
+
 const revealEls = document.querySelectorAll(".reveal, .reveal-right, .reveal-left");
 const observer = new IntersectionObserver(
   (entries) => {
@@ -35,10 +65,15 @@ const observer = new IntersectionObserver(
   },
   { threshold: 0.12 }
 );
-revealEls.forEach((el) => observer.observe(el));
-// ========================
-// CALENDAR
-// ========================
+function startReveal() {
+  revealEls.forEach((el) => observer.observe(el));
+}
+if (root.classList.contains("has-intro")) {
+  document.addEventListener("introdone", startReveal, { once: true });
+} else {
+  startReveal();
+}
+
 const calContainer = document.getElementById("calendar");
 const MONTHS_UA = ["Січень","Лютий","Березень","Квітень","Травень","Червень","Липень","Серпень","Вересень","Жовтень","Листопад","Грудень"];
 const DAYS_UA = ["Пн","Вт","Ср","Чт","Пт","Сб","Нд"];
@@ -77,10 +112,8 @@ function renderCalendar() {
     const isToday = date.getTime() === today.getTime();
     const isSelected = selectedDate && date.getTime() === selectedDate.getTime();
 
-    // Build classes — selected takes visual priority over today
     let cls = "cal-day";
     if (isPast) cls += " past";
-    // Add today class only when NOT selected (CSS handles styling)
     if (isToday) cls += " today";
     if (isSelected) cls += " selected";
 
@@ -118,9 +151,7 @@ calContainer.addEventListener("click", (e) => {
     updateTimeSlots();
   }
 });
-// ========================
-// TIME SLOTS
-// ========================
+
 let selectedTime = null;
 
 function updateTimeSlots() {
@@ -147,9 +178,7 @@ function updateTimeSlots() {
 }
 
 updateTimeSlots();
-// ========================
-// PHONE MASK
-// ========================
+
 const phoneInput = document.getElementById("phone");
 if (phoneInput) {
   phoneInput.addEventListener("input", (e) => {
@@ -165,9 +194,7 @@ if (phoneInput) {
     e.target.value = formatted;
   });
 }
-// ========================
-// HISTORY — localStorage helpers
-// ========================
+
 const HISTORY_KEY = "joker_bookings";
 
 function getHistory() {
@@ -180,7 +207,7 @@ function getHistory() {
 
 function saveBookingToHistory(booking) {
   const history = getHistory();
-  history.unshift(booking); // newest first
+  history.unshift(booking);
   localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
 }
 
@@ -216,7 +243,6 @@ function closeHistoryModal() {
   document.getElementById("historyModal").classList.remove("open");
 }
 
-// History button wiring (desktop + mobile)
 document.getElementById("historyBtn").addEventListener("click", openHistoryModal);
 const historyBtnMobile = document.getElementById("historyBtnMobile");
 if (historyBtnMobile) {
@@ -228,13 +254,10 @@ if (historyBtnMobile) {
 document.getElementById("historyModalClose").addEventListener("click", closeHistoryModal);
 document.getElementById("historyModalCloseBtn").addEventListener("click", closeHistoryModal);
 
-// Close history modal on backdrop click
 document.getElementById("historyModal").addEventListener("click", (e) => {
   if (e.target === document.getElementById("historyModal")) closeHistoryModal();
 });
-// ========================
-// BOOKING SUBMIT
-// ========================
+
 document.addEventListener("DOMContentLoaded", () => {
   const bookBtn = document.getElementById("bookBtn");
   const modal = document.getElementById("modal");
@@ -283,7 +306,6 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       const data = await res.json();
       if (data.ok) {
-        // Save to history
         const now = new Date();
         saveBookingToHistory({
           name,
@@ -314,9 +336,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   bookBtn.addEventListener("click", sendBooking);
 });
-// ========================
-// FLIP MASTERS
-// ========================
+
 document.querySelectorAll(".master-card").forEach((card) => {
   card.addEventListener("click", () => card.classList.toggle("flipped"));
 });
@@ -326,13 +346,9 @@ document.querySelectorAll(".select-barber").forEach((btn) => {
 document.querySelectorAll(".insta-link").forEach((link) => {
   link.addEventListener("click", (e) => e.stopPropagation());
 });
-// ========================
-// NOW YEAR
-// ========================
+
 document.getElementById("year").textContent = new Date().getFullYear();
-// ========================
-// CHANGE BARBER
-// ========================
+
 document.addEventListener("DOMContentLoaded", () => {
   const barberSelect = document.getElementById("barberSelect");
   const buttons = document.querySelectorAll(".select-barber");

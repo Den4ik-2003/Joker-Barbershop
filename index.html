@@ -4,6 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Joker Barbershop — №1</title>
+    <script>
+      try {
+        if (!sessionStorage.getItem("jb_intro")) {
+          document.documentElement.classList.add("has-intro");
+          sessionStorage.setItem("jb_intro", "1");
+        }
+      } catch (e) {}
+    </script>
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Raleway:wght@300;400;600;700&display=swap"
       rel="stylesheet"
@@ -13,7 +21,14 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   </head>
   <body>
-    <!-- NAV -->
+    <div class="intro" id="intro" aria-hidden="true">
+      <div class="intro__glow"></div>
+      <div class="intro__title">JOKER</div>
+      <div class="intro__sub">BARBERSHOP</div>
+      <span class="intro__line"></span>
+      <div class="intro__tag">PREMIUM BARBERSHOP</div>
+    </div>
+
     <header class="nav" id="nav">
       <div class="nav__logo">
         <img src="images/logo.webp" loading="lazy" alt="Logo" />
@@ -40,23 +55,22 @@
       <a href="#booking" class="btn btn--gold" onclick="closeMenu()">ЗАПИСАТИСЬ</a>
     </div>
 
-    <!-- HERO -->
     <section class="hero" id="hero">
       <div class="hero__bg"></div>
 
       <div class="hero__content">
-        <p class="hero__eyebrow reveal">— Місце справжнього чоловічого стилю</p>
+        <p class="hero__eyebrow reveal" style="animation-delay: 0.1s">— Місце справжнього чоловічого стилю</p>
 
-        <h1 class="hero__title reveal">
+        <h1 class="hero__title reveal" style="animation-delay: 0.3s">
           БАРБЕРШОП <span class="gold">ПРЕМІУМ</span>
         </h1>
 
-        <p class="hero__sub reveal">
+        <p class="hero__sub reveal" style="animation-delay: 0.5s">
           Ідеальні стрижки, небезпечне гоління та атмосфера, куди хочеться
           повертатись
         </p>
 
-        <a href="#booking" class="btn btn--gold reveal"> ЗАПИСАТИСЬ ОНЛАЙН </a>
+        <a href="#booking" class="btn btn--gold reveal" style="animation-delay: 0.7s"> ЗАПИСАТИСЬ ОНЛАЙН </a>
       </div>
 
       <div class="hero__scroll">
@@ -64,7 +78,6 @@
       </div>
     </section>
 
-    <!-- MASTERS -->
     <section class="masters" id="masters">
       <div class="section-header">
         <div class="divider">
@@ -170,7 +183,6 @@
       </div>
     </section>
 
-    <!-- SOCIAL -->
     <section class="social">
       <div class="social__left reveal">
         <h2>СЛІДКУЙ<br />ЗА НАМИ</h2>
@@ -203,7 +215,6 @@
       </div>
     </section>
 
-    <!-- HISTORY -->
     <section class="history" id="about">
       <div class="history__img reveal-left">
         <img src="images/history.webp" alt="Barbershop tools" loading="lazy" />
@@ -225,7 +236,6 @@
       </div>
     </section>
 
-    <!-- ADVANTAGES -->
     <section class="advantages" id="services">
       <div class="section-header">
         <div class="divider">
@@ -260,7 +270,6 @@
       </div>
     </section>
 
-    <!-- PRICES -->
     <section class="prices" id="prices">
       <div class="section-header">
         <div class="divider">
@@ -295,7 +304,6 @@
       </div>
     </section>
 
-    <!-- BOOKING -->
     <section class="booking" id="booking">
       <div class="section-header">
         <div class="divider">
@@ -375,7 +383,6 @@
       </div>
     </section>
 
-    <!-- BOOKING MODAL (validation) -->
     <div class="modal" id="modal">
       <div class="modal__content">
         <p id="modalText"></p>
@@ -383,7 +390,6 @@
       </div>
     </div>
 
-    <!-- HISTORY MODAL -->
     <div class="modal" id="historyModal">
       <div class="modal__content modal__content--history">
         <div class="history-modal-header">
@@ -395,7 +401,6 @@
       </div>
     </div>
 
-    <!-- FOOTER -->
     <footer class="footer" id="contacts">
       <div class="footer__logo">
         <div class="nav__logo">

@@ -1,7 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
-/* ========================
-VARIABLES & RESET
-======================== */
 :root {
   --bg: #0d0d0d;
   --bg2: #111111;
@@ -45,9 +42,163 @@ a {
   text-decoration: none;
   color: inherit;
 }
-/* ========================
-BUTTONS
-======================== */
+
+.intro {
+  display: none;
+}
+.has-intro body {
+  overflow: hidden;
+}
+.has-intro .intro {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh;
+  z-index: 100000;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  background: radial-gradient(ellipse at center, #1a1209 0%, #0d0d0d 55%, #050505 100%);
+  animation: introOut 1.5s ease 5.5s forwards;
+}
+@keyframes introOut {
+  to { opacity: 0; visibility: hidden; }
+}
+.intro__glow {
+  position: absolute;
+  width: min(70vmin, 620px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.28), transparent 65%);
+  opacity: 0;
+  transform: scale(0.6);
+  animation: glowIn 3s ease 0.2s forwards, glowPulse 3.2s ease-in-out 3.2s infinite;
+}
+@keyframes glowIn {
+  to { opacity: 0.9; transform: scale(1); }
+}
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.9; transform: scale(1); }
+  50% { opacity: 0.65; transform: scale(1.1); }
+}
+.intro__title {
+  position: relative;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(3.2rem, 16vw, 9rem);
+  letter-spacing: 0.12em;
+  padding-left: 0.12em;
+  line-height: 1;
+  background: linear-gradient(110deg, #f0ece4 0%, #f0ece4 40%, #e5c76b 50%, #f0ece4 60%, #f0ece4 100%);
+  background-size: 250% 100%;
+  background-position: 0 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  opacity: 0;
+  transform: scale(1.08);
+  animation: titleIn 2s ease 1s forwards, shine 1.8s ease 2.4s forwards;
+}
+@keyframes titleIn {
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes shine {
+  to { background-position: 100% 0; }
+}
+.intro__sub {
+  position: relative;
+  margin-top: 14px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(0.9rem, 3.6vw, 1.6rem);
+  color: var(--white);
+  letter-spacing: 0.2em;
+  padding-left: 0.2em;
+  opacity: 0;
+  animation: subIn 1.5s ease 3s forwards;
+}
+@keyframes subIn {
+  to { opacity: 0.9; letter-spacing: 0.55em; padding-left: 0.55em; }
+}
+.intro__line {
+  position: relative;
+  display: block;
+  width: 0;
+  height: 1px;
+  margin: 22px 0;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  animation: lineIn 1.2s ease 3.4s forwards;
+}
+@keyframes lineIn {
+  to { width: min(280px, 60vw); }
+}
+.intro__tag {
+  position: relative;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(0.7rem, 2.6vw, 1rem);
+  color: var(--gold);
+  letter-spacing: 0.4em;
+  padding-left: 0.4em;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: tagIn 1s ease 4.5s forwards;
+}
+@keyframes tagIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+.intro__spark {
+  position: absolute;
+  bottom: -10px;
+  left: var(--x);
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  background: var(--gold-light);
+  box-shadow: 0 0 6px var(--gold);
+  opacity: 0;
+  animation: spark var(--d) linear var(--t) infinite;
+}
+@keyframes spark {
+  0% { opacity: 0; transform: translate3d(0, 0, 0); }
+  15% { opacity: 0.8; }
+  100% { opacity: 0; transform: translate3d(var(--dx), -70vh, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .has-intro .intro {
+    animation: introOut 0.4s ease 1.2s forwards;
+  }
+  .intro *,
+  .hero__bg::before {
+    animation: none !important;
+  }
+  .intro__glow {
+    opacity: 0.8;
+    transform: none;
+  }
+  .intro__title,
+  .intro__sub,
+  .intro__tag {
+    opacity: 1;
+    transform: none;
+  }
+  .intro__sub {
+    letter-spacing: 0.55em;
+    padding-left: 0.55em;
+  }
+  .intro__line {
+    width: min(280px, 60vw);
+  }
+  .intro__spark {
+    display: none;
+  }
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -99,7 +250,6 @@ BUTTONS
   color: #0d0d0d;
   transform: translateY(-2px);
 }
-/* History button in nav */
 .btn--history {
   background: transparent;
   border: 1px solid rgba(201, 168, 76, 0.4);
@@ -126,9 +276,7 @@ BUTTONS
   justify-content: center;
   margin-top: 16px;
 }
-/* ========================
-   REVEAL ANIMATIONS
-======================== */
+
 .reveal,
 .reveal-right,
 .reveal-left {
@@ -148,9 +296,7 @@ BUTTONS
   opacity: 1 !important;
   transform: none !important;
 }
-/* ========================
-NAV
-======================== */
+
 .nav {
   position: fixed;
   top: 0;
@@ -248,9 +394,7 @@ NAV
   justify-content: center;
   width: 100%;
 }
-/* ========================
-HERO
-======================== */
+
 .hero {
   position: relative;
   display: flex;
@@ -263,6 +407,7 @@ HERO
 .hero__bg {
   position: absolute;
   inset: 0;
+  overflow: hidden;
   background:
     radial-gradient(
       ellipse at 70% 50%,
@@ -278,6 +423,11 @@ HERO
   inset: 0;
   background: url("images/main.webp") center/cover no-repeat;
   opacity: 0.4;
+  animation: heroZoom 20s ease-in-out infinite alternate;
+}
+@keyframes heroZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
 }
 .hero__content {
   position: relative;
@@ -289,7 +439,6 @@ HERO
   letter-spacing: 4px;
   color: var(--gold);
   margin-bottom: 20px;
-  animation-delay: 0.1s;
 }
 .hero__title {
   font-family: var(--font-display);
@@ -297,7 +446,6 @@ HERO
   font-weight: 900;
   line-height: 1;
   margin-bottom: 18px;
-  animation-delay: 0.2s;
 }
 .gold {
   color: var(--gold);
@@ -307,10 +455,6 @@ HERO
   letter-spacing: 3px;
   opacity: 0.6;
   margin-bottom: 44px;
-  animation-delay: 0.3s;
-}
-.hero__content .btn {
-  animation-delay: 0.4s;
 }
 .hero__chair {
   position: absolute;
@@ -379,9 +523,7 @@ HERO
     margin-top: 0;
   }
 }
-/* ========================
-SECTION HEADER
-======================== */
+
 .section-header {
   text-align: center;
   margin-bottom: 60px;
@@ -415,9 +557,7 @@ SECTION HEADER
 .scissors img {
   max-width: 20px;
 }
-/* ========================
-MASTERS
-======================== */
+
 .masters {
   padding: 100px 60px;
   background: var(--bg2);
@@ -534,9 +674,7 @@ MASTERS
   transform: rotateY(0);
   opacity: 1;
 }
-/* ========================
-SOCIAL
-======================== */
+
 .social {
   padding: 100px 60px;
   display: flex;
@@ -599,9 +737,7 @@ SOCIAL
   cursor: pointer;
   color: var(--gold);
 }
-/* ========================
-HISTORY SECTION
-======================== */
+
 .history {
   display: flex;
   align-items: center;
@@ -646,9 +782,7 @@ HISTORY SECTION
 .history__text .btn--outline-gold {
   margin-top: 20px;
 }
-/* ========================
-   ADVANTAGES
-======================== */
+
 .advantages {
   padding: 100px 60px;
   background: var(--bg);
@@ -689,9 +823,7 @@ HISTORY SECTION
   opacity: 0.65;
   line-height: 1.7;
 }
-/* ========================
-   PRICES 
-======================== */
+
 .prices {
   padding: 100px 60px;
   background: var(--bg);
@@ -756,9 +888,7 @@ HISTORY SECTION
     gap: 40px;
   }
 }
-/* ========================
-BOOKING
-======================== */
+
 .booking {
   padding: 100px 60px;
   background: var(--bg2);
@@ -875,9 +1005,7 @@ BOOKING
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
-/* ========================
-MODALS (validation + history)
-======================== */
+
 .modal {
   position: fixed;
   inset: 0;
@@ -910,7 +1038,6 @@ MODALS (validation + history)
   color: var(--white);
   opacity: 0.9;
 }
-/* History modal overrides */
 .modal__content--history {
   width: 480px;
   max-width: 95vw;
@@ -1009,9 +1136,7 @@ MODALS (validation + history)
   from { transform: scale(0.85); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
-/* ========================
-CALENDAR
-======================== */
+
 .calendar {
   background: var(--bg);
   border: 1px solid var(--border);
@@ -1069,14 +1194,12 @@ CALENDAR
   background: var(--gold-dim);
   color: var(--gold);
 }
-/* FIX: selected always shows gold bg with dark text, regardless of today */
 .cal-day.selected {
   background: var(--gold);
   color: #0d0d0d !important;
   font-weight: 700;
   border: none !important;
 }
-/* today without being selected — show gold border, gold text */
 .cal-day.today:not(.selected) {
   border: 1px solid var(--gold);
   color: var(--gold);
@@ -1088,9 +1211,7 @@ CALENDAR
 .cal-day.empty {
   cursor: default;
 }
-/* ========================
-BOOKING SUCCESS
-======================== */
+
 .booking__success {
   display: none;
   text-align: center;
@@ -1124,9 +1245,7 @@ BOOKING SUCCESS
   opacity: 0.6;
   font-size: 0.9rem;
 }
-/* ========================
-FOOTER
-======================== */
+
 .footer {
   background: #080808;
   border-top: 1px solid var(--border);
@@ -1230,9 +1349,7 @@ FOOTER
 .footer__dev a:hover {
   color: #fff;
 }
-/* ========================
-RESPONSIVE
-======================== */
+
 @media (max-width: 1024px) {
   .nav {
     padding: 16px 30px;
